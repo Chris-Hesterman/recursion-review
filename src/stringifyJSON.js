@@ -9,37 +9,42 @@
 var stringifyJSON = function(obj) {
   // define empty string
   let stringify = '';
-  // define exception tests
-  if (obj === null) {
-    return 'null';
-    //possibly concat with stringify?
+
+  if (typeof obj !== 'function' && typeof obj !== 'undefined') {
+    if (typeof obj === 'string') {
+      stringify += '"' + obj + '"';
+    } else if (Array.isArray(obj)) {
+      let result = [];
+      for (let item of obj) {
+        result.push(stringifyJSON(item));
+      }
+      return '[' + result.toString() + ']';
+    }
   }
   // if num or Bool concat with string
-  if (typeof obj === 'number' || typeof obj === 'boolean') {
+  if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null) {
     stringify += obj;
   }
-  // if string, stringify, concat
-  if (typeof obj === 'string') {
-    obj = '"' + obj + '"';
-    stringify += obj;
-  }
-  // if array,
-  if (Array.isArray(obj)) {
-    let str = '';
 
-    obj.forEach(function(element) {
-      if (
-        typeof element !== 'function' &&
-        typeof element !== 'undefined' &&
-        typeof element !== NaN
-      ) {
-        str += stringifyJSON(element) + ',';
-      }
-    });
-    return '[' + str.slice(0, str.length - 1) + ']';
-  }
-  // iterate over elements of array, concat
   // if object
-  // iterate over properties, concat
+  if (typeof obj === 'object' && obj !== null) {
+    for (let key in obj) {
+      let substr = '';
+      if (
+        obj[key] !== 'undefined' &&
+        typeof obj[key] !== 'function' &&
+        key !== 'undefined' &&
+        typeof key !== 'function'
+      ) {
+        console.log('key:', key);
+        console.log('value: ', obj[key]);
+        substr += stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',';
+        stringify += substr;
+      }
+    }
+    //could this be result futurePair.toString() vs stringify
+    return '{' + stringify.slice(0, stringify.length - 1) + '}';
+  }
   //return string
+  return stringify;
 };
