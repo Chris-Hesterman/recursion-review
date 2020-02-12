@@ -2,36 +2,37 @@
 // var getElementsByClassName = function (className) {
 //   return document.getElementsByClassName(className);
 // };
-
+// i - node tree
+// o - an array of nodes
+// e - some nodes may have children, an empty tree with no nodes may be passed, need to address base case given recursion, some nodes may not be elements
+// c - can't use getElementsByClassName; must use use element.childNodes, document.body, element.classList
+//strategy:
+/*
+  //define an empty results array to store class names
+  //get elements
+  //check class list for each element
+  //push each node with className to results array
+  //test if child nodes
+  //iterate over child nodes, recursively call function if childNode
+  //base case === no nodes left
+  //return results array
+*/
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function (className, element) {
+var getElementsByClassName = function (className, currentNode) {
   let results = [];
-  element = element || document.body;
-  let kids = element.children;
-
-  if (element.classList.includes(className)) {
-    results.push(element);
+  currentNode = currentNode || document.body;
+  let subNodes = currentNode.childNodes;
+  //trying both, will remove if superfluous
+  if (currentNode.classList && currentNode.classList.contains(className)) {
+    //console.log('className:', className);
+    results.push(currentNode);
+    //console.log('element:', currentNode);
   }
-  _.each(kids, function (el) {
-    // let classes = Array.from(el.classList);
-
-    if (classes.includes(className)) {
-      results.push(el);
-    }
-    if (!el.children.length) {
-      return;
-    }
-    if (el.children.length) {
-      console.log(el.children)
-      results.push(getElementsByClassName(className, el));
-    }
-  });
-  console.log(results);
+  if (subNodes.length) {
+    _.each(subNodes, function (subNode) {
+      results = results.concat(getElementsByClassName(className, subNode));
+    });
+  }
+  //console.log(results);
   return results;
 };
-  //get elements
-  //results array
-  //check class list for each element
-  //push matches to results
-  //endcase no children
-  //otherwise recall function
