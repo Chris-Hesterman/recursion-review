@@ -7,9 +7,8 @@
 
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
-  // define empty string
   let stringify = '';
-
+  //if string or Array
   if (typeof obj !== 'function' && typeof obj !== 'undefined') {
     if (typeof obj === 'string') {
       stringify += '"' + obj + '"';
@@ -25,26 +24,21 @@ var stringifyJSON = function(obj) {
   if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null) {
     stringify += obj;
   }
-
   // if object
   if (typeof obj === 'object' && obj !== null) {
     for (let key in obj) {
-      let substr = '';
       if (
         obj[key] !== 'undefined' &&
         typeof obj[key] !== 'function' &&
         key !== 'undefined' &&
         typeof key !== 'function'
       ) {
-        console.log('key:', key);
-        console.log('value: ', obj[key]);
-        substr += stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',';
-        stringify += substr;
+        // console.log('key:', key);
+        // console.log('value: ', obj[key]);
+        stringify += stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',';
       }
     }
-    //could this be result futurePair.toString() vs stringify
     return '{' + stringify.slice(0, stringify.length - 1) + '}';
   }
-  //return string
   return stringify;
 };
