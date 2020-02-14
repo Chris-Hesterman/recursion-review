@@ -4,7 +4,7 @@
 // o - proper parsed javascript object
 // e - none known
 // c - none known
-//strategy: identify initial character in JSON string
+// strategy: identify initial character in JSON string
 // send to appropriate helper method depending on actual character
 // need to evaluate each character in parseable string
 // need to identify endpoint of each string, and eval string up to that point
