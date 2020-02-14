@@ -18,18 +18,17 @@
   //return results array
 */
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function (className, currentNode) {
+var getElementsByClassName = function(className, currentNode) {
   let results = [];
   currentNode = currentNode || document.body;
-  let subNodes = currentNode.childNodes;
   //trying both, will remove if superfluous
   if (currentNode.classList && currentNode.classList.contains(className)) {
     //console.log('className:', className);
     results.push(currentNode);
     //console.log('element:', currentNode);
   }
-  if (subNodes.length) {
-    _.each(subNodes, function (subNode) {
+  if (currentNode.hasChildNodes()) {
+    _.each(currentNode.childNodes, function(subNode) {
       results = results.concat(getElementsByClassName(className, subNode));
     });
   }
