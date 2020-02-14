@@ -28,7 +28,7 @@ var getElementsByClassName = function (className, currentNode) {
     results.push(currentNode);
     //console.log('element:', currentNode);
   }
-  if (subNodes.length) {
+  if (currentNode.hasChildNode) {
     _.each(subNodes, function (subNode) {
       results = results.concat(getElementsByClassName(className, subNode));
     });
