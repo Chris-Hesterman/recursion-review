@@ -18,7 +18,7 @@
   //return results array
 */
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function (className, currentNode) {
+var getElementsByClassName = function(className, currentNode) {
   let results = [];
   currentNode = currentNode || document.body;
   let subNodes = currentNode.childNodes;
@@ -29,7 +29,7 @@ var getElementsByClassName = function (className, currentNode) {
     //console.log('element:', currentNode);
   }
   if (currentNode.hasChildNodes()) {
-    _.each(currentNode.childNodes, function (subNode) {
+    _.each(currentNode.childNodes, function(subNode) {
       results = results.concat(getElementsByClassName(className, subNode));
     });
   }
