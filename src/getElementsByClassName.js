@@ -28,8 +28,8 @@ var getElementsByClassName = function (className, currentNode) {
     results.push(currentNode);
     //console.log('element:', currentNode);
   }
-  if (currentNode.hasChildNode) {
-    _.each(subNodes, function (subNode) {
+  if (currentNode.hasChildNodes()) {
+    _.each(currentNode.childNodes, function (subNode) {
       results = results.concat(getElementsByClassName(className, subNode));
     });
   }
