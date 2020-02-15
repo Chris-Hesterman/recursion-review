@@ -17,17 +17,18 @@
 6) Null
 */
 // but you're not, so you'll write it from scratch:
-var parseJSON = function(json) {
+var parseJSON = function (json) {
+
   //define vars for index and char
   let index = 0;
   let char = json[index];
   //next function
-  let next = function() {
+  let next = function () {
     index++;
     char = json[index];
   };
   //eval char function
-  let evalChar = function() {
+  let evalChar = function () {
     if (char === '"') {
       string();
     }
@@ -47,4 +48,39 @@ var parseJSON = function(json) {
       isNumber();
     }
   };
+  //HELPER FUNCTIONS
+  let string = function () {
+    //
+  };
+
+  let object = function () {
+
+  };
+  //returns an array
+  let array = function () {
+    let result = [];
+    //call next function to increment index and char
+    next();
+    //if char is end of array ]
+    if (char === ']') {
+      return result;
+    }
+    //else evalChar()
+    result.push(evalChar());
+  };
+
+  let bool = function () {
+
+  };
+
+  let isNull = function () {
+
+  };
+
+  let isNumber = function () {
+
+  };
+
+  return evalChar();
 };
+
