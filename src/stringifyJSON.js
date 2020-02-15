@@ -3,7 +3,7 @@
 // i - takes in obj/arr/num/bool/string/
 // o - return string (JSON)
 // c - none
-// e - if obj === function, undefined, null. In the case of null return 'null'
+// e - if obj === function, undefined, null. In the case of null return null
 
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
