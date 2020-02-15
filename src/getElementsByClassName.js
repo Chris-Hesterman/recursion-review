@@ -21,7 +21,7 @@
 var getElementsByClassName = function(className, currentNode) {
   let results = [];
   currentNode = currentNode || document.body;
-  //trying both, will remove if superfluous
+  //trying both below tests, will remove if superfluous
   if (currentNode.classList && currentNode.classList.contains(className)) {
     //console.log('className:', className);
     results.push(currentNode);
