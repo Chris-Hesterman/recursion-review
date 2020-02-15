@@ -32,6 +32,6 @@ var getElementsByClassName = function(className, currentNode) {
       results = results.concat(getElementsByClassName(className, subNode));
     });
   }
-  //console.log(results);
+
   return results;
 };

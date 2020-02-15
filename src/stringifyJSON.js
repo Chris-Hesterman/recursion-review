@@ -40,5 +40,6 @@ var stringifyJSON = function(obj) {
     }
     return '{' + stringify.slice(0, stringify.length - 1) + '}';
   }
+
   return stringify;
 };
