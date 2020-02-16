@@ -17,47 +17,44 @@
 6) Null
 */
 // but you're not, so you'll write it from scratch:
-var parseJSON = function (json) {
-
+var parseJSON = function(json) {
   //define vars for index and char
   let index = 0;
   let char = json[index];
   //next function
-  let next = function () {
+  let next = function() {
     index++;
     char = json[index];
   };
   //eval char function
-  let evalChar = function () {
+  let evalChar = function() {
     if (char === '"') {
-      string();
+      return string();
     }
     if (char === '{') {
-      object();
+      return object();
     }
     if (char === '[') {
-      array();
+      return array();
     }
     if (char === 't' || char === 'f') {
-      bool();
+      return bool();
     }
     if (char === 'n') {
-      isNull();
+      return isNull();
     }
     if (typeof parseInt(char) === 'number' || char === '-') {
-      isNumber();
+      return isNumber();
     }
   };
   //HELPER FUNCTIONS
-  let string = function () {
+  let string = function() {
     //
   };
 
-  let object = function () {
-
-  };
+  let object = function() {};
   //returns an array
-  let array = function () {
+  let array = function() {
     let result = [];
     //call next function to increment index and char
     next();
@@ -69,18 +66,11 @@ var parseJSON = function (json) {
     result.push(evalChar());
   };
 
-  let bool = function () {
+  let bool = function() {};
 
-  };
+  let isNull = function() {};
 
-  let isNull = function () {
-
-  };
-
-  let isNumber = function () {
-
-  };
+  let isNumber = function() {};
 
   return evalChar();
 };
-
