@@ -25,6 +25,10 @@ var parseJSON = function(json) {
   let next = function() {
     index++;
     char = json[index];
+
+    if (char === ':' || char === ' ') {
+      next();
+    }
   };
   //eval char function
   let evalChar = function() {
@@ -49,10 +53,37 @@ var parseJSON = function(json) {
   };
   //HELPER FUNCTIONS
   let string = function() {
-    //
+    let result = '';
+
+    next();
+    while (char !== '"') {
+      result += char;
+      next();
+    }
+    return result;
   };
 
-  let object = function() {};
+  let object = function() {
+    let result = {};
+    let key;
+
+    next();
+    if (char === '}') {
+      return result;
+    }
+    if (!key) {
+      key = evalChar();
+    } else {
+      result[key] = evalChar();
+      next();
+    }
+    while (char !== '}') {
+      key = evalChar();
+      next();
+      result[key] = evalChar();
+      next();
+    }
+  };
   //returns an array
   let array = function() {
     let result = [];
